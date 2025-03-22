@@ -25,25 +25,25 @@ public class MoneyTransferTest {
     @Test
     void shouldTransferMoneyBetweenOwnCards1() {
         var dashboard = new DashboardPage();
-        var currentBalanceFirstCard = dashboard.getCardBalance("**** **** **** 0002");
-        var currentBalanceSecondCard = dashboard.getCardBalance("**** **** **** 0001");
+        var currentBalanceFirstCard = dashboard.getCardBalance("**** **** **** 0001");
+        var currentBalanceSecondCard = dashboard.getCardBalance("**** **** **** 0002");
         int minSum = 1;
-        int randomSum = minSum + (int) (Math.random() * ((currentBalanceFirstCard - minSum) + 1));
+        int randomSum = minSum + (int) (Math.random() * ((currentBalanceSecondCard - minSum) + 1));
         dashboard.moneyTransfer(cardNumber(1)).transaction(Integer.toString(randomSum), cardNumber(2));
-        assertEquals(currentBalanceSecondCard - randomSum, dashboard.getCardBalance("**** **** **** 0001"));
-        assertEquals(currentBalanceFirstCard + randomSum, dashboard.getCardBalance("**** **** **** 0002"));
+        assertEquals(currentBalanceFirstCard + randomSum, dashboard.getCardBalance("**** **** **** 0001"));
+        assertEquals(currentBalanceSecondCard - randomSum, dashboard.getCardBalance("**** **** **** 0002"));
     }
 
     @Test
     void shouldTransferMoneyBetweenOwnCards2() {
         var dashboard = new DashboardPage();
-        var currentBalanceFirstCard = dashboard.getCardBalance("**** **** **** 0002");
-        var currentBalanceSecondCard = dashboard.getCardBalance("**** **** **** 0001");
+        var currentBalanceFirstCard = dashboard.getCardBalance("**** **** **** 0001");
+        var currentBalanceSecondCard = dashboard.getCardBalance("**** **** **** 0002");
         int minSum = 1;
         int randomSum = minSum + (int) (Math.random() * ((currentBalanceFirstCard - minSum) + 1));
         dashboard.moneyTransfer(cardNumber(2)).transaction(Integer.toString(randomSum), cardNumber(1));
-        assertEquals(currentBalanceSecondCard + randomSum, dashboard.getCardBalance("**** **** **** 0001"));
-        assertEquals(currentBalanceFirstCard - randomSum, dashboard.getCardBalance("**** **** **** 0002"));
+        assertEquals(currentBalanceFirstCard - randomSum, dashboard.getCardBalance("**** **** **** 0001"));
+        assertEquals(currentBalanceSecondCard + randomSum, dashboard.getCardBalance("**** **** **** 0002"));
     }
 }
 
