@@ -4,6 +4,7 @@ import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.Value;
 
 public class DataHelper {
+
     private DataHelper() {
     }
 
@@ -27,8 +28,19 @@ public class DataHelper {
     }
 
     @NotNull
+    public static String encryptedCardNumber(int item) {
+        String[] cards = {" ", "**** **** **** 0001", "**** **** **** 0002"};
+        return cards[item];
+    }
+
+    @NotNull
     public static String cardNumber(int item) {
         String[] cards = {" ", "5559 0000 0000 0001", "5559 0000 0000 0002"};
         return cards[item];
+    }
+
+    public static int randomSum(int currentBalance) {
+        int minSum = 1;
+        return minSum + (int) (Math.random() * ((currentBalance - minSum) + 1));
     }
 }
